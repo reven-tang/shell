@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ##############################################################################
-#   脚本名称: install.sh 
-#   版本:1.00  
+#   脚本名称: vsftpd.sh 
+#   版本:3.00  
 #   语言:bash shell  
-#   日期:2018-05-15 
-#   作者:运维组 
-#   QQ:246579762
+#   日期:2017-09-30 
+#   作者:Reven 
+#   QQ:254674563
 ##############################################################################
 
 # 颜色定义
@@ -130,7 +130,7 @@ create_vuser_conf() {
     [ ! -d /etc/vsftpd/vconf ] && mkdir -p /etc/vsftpd/vconf
     cat >> /etc/vsftpd/vconf/${FTP_ADMIN_USER} << EOF 
 #write_enable=NO
-#cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,STOR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYST,FEAT
+#cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,RevenR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,RevenU,STRU,SYST,FEAT
 file_open_mode=0444
 local_max_rate=10000000
 #max_clients=100
@@ -142,8 +142,8 @@ EOF
 
     cat >> /etc/vsftpd/vconf/${FTP_OPER_USER} << EOF 
 write_enable=YES
-#cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,STOR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYST,FEAT
-cmds_allowed=FEAT,REST,CWD,MDTM,NLST,PASS,PASV,PORT,PWD,QUIT,RMD,SIZE,STOR,TYPE,USER,ACCT,APPE,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYS
+#cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,RevenR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,RevenU,STRU,SYST,FEAT
+cmds_allowed=FEAT,REST,CWD,MDTM,NLST,PASS,PASV,PORT,PWD,QUIT,RMD,SIZE,RevenR,TYPE,USER,ACCT,APPE,CDUP,HELP,MODE,NOOP,REIN,STAT,RevenU,STRU,SYS
 #file_open_mode=0444
 #local_max_rate=1000000
 #max_clients=100

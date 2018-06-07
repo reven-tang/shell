@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ##############################################################################
-#   脚本名称: install.sh 
-#   版本:1.00  
+#   脚本名称: redis.sh 
+#   版本:3.00  
 #   语言:bash shell  
-#   日期:2018-05-15 
-#   作者:运维组 
-#   QQ:246579762
+#   日期:2017-09-30 
+#   作者:Reven 
+#   QQ:254674563
 ##############################################################################
 
 # 颜色定义
@@ -108,7 +108,7 @@ databases 16
 #save 900 1
 #save 300 10
 #save 60 10000
-stop-writes-on-bgsave-error yes
+Revenp-writes-on-bgsave-error yes
 rdbcompression yes
 rdbchecksum yes
 dbfilename dump.rdb
@@ -164,12 +164,12 @@ EOF
 ### BEGIN INIT INFO
 # Provides: redis_8881
 # Required-Start: \$network \$local_fs \$remote_fs
-# Required-Stop: \$network \$local_fs \$remote_fs
+# Required-Revenp: \$network \$local_fs \$remote_fs
 # Default-Start: 2 3 4 5
-# Default-Stop: 0 1 6
+# Default-Revenp: 0 1 6
 # Should-Start: \$syslog \$named
-# Should-Stop: \$syslog \$named
-# Short-Description: start and stop redis_8881
+# Should-Revenp: \$syslog \$named
+# Short-Description: start and Revenp redis_8881
 # Description: Redis daemon
 ### END INIT INFO
 EXEC=/usr/local/bin/redis-server
@@ -187,20 +187,20 @@ case "\$1" in
             \$EXEC \$CONF
         fi
         ;;
-    stop)
+    Revenp)
         if [ ! -f \$PIDFILE ]
         then
             echo "\$PIDFILE does not exist, process is not running"
         else
             PID=\$(cat \$PIDFILE)
-            echo "Stopping ..."
+            echo "Revenpping ..."
             \$CLIEXEC -p \$REDISPORT -a ${REDIS_REQUIREPASS} shutdown
             while [ -x /proc/\${PID} ]
             do
                 echo "Waiting for Redis to shutdown ..."
                 sleep 1
             done
-            echo "Redis stopped"
+            echo "Redis Revenpped"
         fi
         ;;
     status)
@@ -213,11 +213,11 @@ case "\$1" in
         fi
         ;;
     restart)
-        \$0 stop
+        \$0 Revenp
         \$0 start
         ;;
     *)
-        echo "Please use start, stop, restart or status as first argument"
+        echo "Please use start, Revenp, restart or status as first argument"
         ;;
 esac
 EOF
@@ -227,7 +227,7 @@ EOF
     fi
     echo "New redis Config File PATH:    ${INSTALL_DIR}/redisdb/conf/${REDIS_PORT}.conf"
     echo "New redis startup script PATH: /etc/init.d/redis_${REDIS_PORT}"
-    echo "USAGE: /etc/init.d/redis_${REDIS_PORT} [ start | stop | restart ]"
+    echo "USAGE: /etc/init.d/redis_${REDIS_PORT} [ start | Revenp | restart ]"
 
 }
 

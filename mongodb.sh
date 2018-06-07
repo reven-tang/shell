@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ##############################################################################
-#   脚本名称: install.sh 
-#   版本:1.00  
+#   脚本名称: mongodb.sh 
+#   版本:3.00  
 #   语言:bash shell  
-#   日期:2018-05-15 
-#   作者:运维组 
-#   QQ:246579762
+#   日期:2017-09-30 
+#   作者:Reven 
+#   QQ:254674563
 ##############################################################################
 
 # 颜色定义
@@ -255,9 +255,9 @@ create_mongod_server() {
 # Version Number: 1.0.0
 # Type: Shell
 # Language: bash shell
-# Date: 2015-12-22
-# Author: STO
-# Email: xx12306@163.com
+# Date: 2017-09-30
+# Author: Reven
+# Email: 254674563@qq.com
 
 ################################################
 # chkconfig: 2345 10 90
@@ -334,9 +334,9 @@ create_shard_server() {
 # Version Number: 1.0.0
 # Type: Shell
 # Language: bash shell
-# Date: 2015-12-22
-# Author: STO
-# Email: xx12306@163.com
+# Date: 2017-09-30
+# Author: Reven
+# Email: 254674563@qq.com
 
 ################################################
 # chkconfig: 2345 10 90
@@ -433,9 +433,9 @@ create_config_server() {
 # Version Number: 1.0.0
 # Type: Shell
 # Language: bash shell
-# Date: 2015-12-22
-# Author: Feng HengLian
-# Email: xx12306@163.com
+# Date: 2017-09-30
+# Author: Reven
+# Email: 254674563@qq.com
 
 ################################################
 # chkconfig: 2345 10 90
@@ -510,9 +510,9 @@ create_mongos_server() {
 # Version Number: 1.0.0
 # Type: Shell
 # Language: bash shell
-# Date: 2015-12-22
-# Author: Feng HengLian
-# Email: xx12306@163.com
+# Date: 2017-09-30
+# Author: Reven
+# Email: 254674563@qq.com
 
 ################################################
 # chkconfig: 2345 10 90

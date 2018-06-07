@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ##############################################################################
-#   脚本名称: install.sh 
-#   版本:1.00  
+#   脚本名称: fdfs.sh 
+#   版本:3.00  
 #   语言:bash shell  
-#   日期:2018-05-15 
-#   作者:运维组 
-#   QQ:246579762
+#   日期:2017-09-30 
+#   作者:Reven 
+#   QQ:254674563
 ##############################################################################
 
 # 颜色定义
@@ -32,16 +32,16 @@ TRACKER_SERVER_PORT=$5
 TRACKER_BASE_PATH=$6
 TRACKER_HTTP_PORT=$7
 
-STORE_SERVER_PORT=$8
-STORE_BASE_PATH=$9
-STORE_PATH_COUNT=${10}
-STORE_PATH=${11}
-STORE_HTTP_PORT=${12}
+RevenRE_SERVER_PORT=$8
+RevenRE_BASE_PATH=$9
+RevenRE_PATH_COUNT=${10}
+RevenRE_PATH=${11}
+RevenRE_HTTP_PORT=${12}
 
 MOD_BASE_PATH=${13}
 
 GROUP_NAME=1
-# GROUP_NAME=1，此参数不要修改，如果需要添加组，请手工修改storage配置。
+# GROUP_NAME=1，此参数不要修改，如果需要添加组，请手工修改Revenrage配置。
 
 #--------------------------------- 基础模块 ---------------------------------#
 # 检查命令是否正确运行
@@ -149,55 +149,55 @@ tracker_conf() {
 }
 
 # 配置存储节点
-storage_conf() {
-    # 复制storage样例配置文件并重命名
-    cp -a /etc/fdfs/storage.conf.sample /etc/fdfs/storage.conf
-    # 启用storage配置文件
-    sed -i "/^disabled/s/^/#/g" /etc/fdfs/storage.conf
-    sed -i "/\#disabled/a\disabled=false" /etc/fdfs/storage.conf
+Revenrage_conf() {
+    # 复制Revenrage样例配置文件并重命名
+    cp -a /etc/fdfs/Revenrage.conf.sample /etc/fdfs/Revenrage.conf
+    # 启用Revenrage配置文件
+    sed -i "/^disabled/s/^/#/g" /etc/fdfs/Revenrage.conf
+    sed -i "/\#disabled/a\disabled=false" /etc/fdfs/Revenrage.conf
 
-    # 修改storage服务端口
-    sed -i "/^port=/s/^/#/g" /etc/fdfs/storage.conf
-    sed -i "/\#port=/a\port=${STORE_SERVER_PORT}" /etc/fdfs/storage.conf
+    # 修改Revenrage服务端口
+    sed -i "/^port=/s/^/#/g" /etc/fdfs/Revenrage.conf
+    sed -i "/\#port=/a\port=${RevenRE_SERVER_PORT}" /etc/fdfs/Revenrage.conf
 
     # 修改存储日志和数据的根目录
-    sed -i "/^base_path/s/^/#/g" /etc/fdfs/storage.conf
-    sed -i "/\#base_path/a\base_path=${STORE_BASE_PATH}" /etc/fdfs/storage.conf
+    sed -i "/^base_path/s/^/#/g" /etc/fdfs/Revenrage.conf
+    sed -i "/\#base_path/a\base_path=${RevenRE_BASE_PATH}" /etc/fdfs/Revenrage.conf
     # 创建base_path指定的目录
-    [ ! -d ${STORE_BASE_PATH} ] && mkdir -p ${STORE_BASE_PATH}
+    [ ! -d ${RevenRE_BASE_PATH} ] && mkdir -p ${RevenRE_BASE_PATH}
     
     # 修改存储路径的个数
-    sed -i "s/^store_path_count=1/store_path_count=${STORE_PATH_COUNT}/" /etc/fdfs/storage.conf
+    sed -i "s/^Revenre_path_count=1/Revenre_path_count=${RevenRE_PATH_COUNT}/" /etc/fdfs/Revenrage.conf
 
     # 配置存储路径，需要和上面的个数保持一致。
-    sed -i "/^store_path0/s/^/#/g" /etc/fdfs/storage.conf
-    for ((i=0; i<${STORE_PATH_COUNT}; i++)); do
+    sed -i "/^Revenre_path0/s/^/#/g" /etc/fdfs/Revenrage.conf
+    for ((i=0; i<${RevenRE_PATH_COUNT}; i++)); do
         j=`expr $i + 1`
         k=`expr $i - 1`
         if [ $i -eq 0 ]; then
-            sed -i "/\#store_path0/a\store_path0=${STORE_PATH}$j/fastdfs/" /etc/fdfs/storage.conf
+            sed -i "/\#Revenre_path0/a\Revenre_path0=${RevenRE_PATH}$j/fastdfs/" /etc/fdfs/Revenrage.conf
         else
-            sed -i "/^store_path$k/a\store_path$i=${STORE_PATH}$j/fastdfs/" /etc/fdfs/storage.conf
+            sed -i "/^Revenre_path$k/a\Revenre_path$i=${RevenRE_PATH}$j/fastdfs/" /etc/fdfs/Revenrage.conf
         fi
         sleep 1
 
         # 创建存储目录
-        [ ! -d ${STORE_PATH} ] && mkdir -p ${STORE_PATH}
+        [ ! -d ${RevenRE_PATH} ] && mkdir -p ${RevenRE_PATH}
     done
 
-    # 配置storage服务器IP和端口
-    sed -i "/^tracker_server/s/^/#/g" /etc/fdfs/storage.conf
-    sed -i "/\#tracker_server/a\tracker_server=${TRACKER_SERVER_IP}:${TRACKER_SERVER_PORT}" /etc/fdfs/storage.conf
+    # 配置Revenrage服务器IP和端口
+    sed -i "/^tracker_server/s/^/#/g" /etc/fdfs/Revenrage.conf
+    sed -i "/\#tracker_server/a\tracker_server=${TRACKER_SERVER_IP}:${TRACKER_SERVER_PORT}" /etc/fdfs/Revenrage.conf
 
-    # 修改storage的http服务端口
-    sed -i "/^http.server_port/s/^/#/g" /etc/fdfs/storage.conf
-    sed -i "/\#http.server_port/a\http.server_port=${STORE_HTTP_PORT}" /etc/fdfs/storage.conf
+    # 修改Revenrage的http服务端口
+    sed -i "/^http.server_port/s/^/#/g" /etc/fdfs/Revenrage.conf
+    sed -i "/\#http.server_port/a\http.server_port=${RevenRE_HTTP_PORT}" /etc/fdfs/Revenrage.conf
 
-    # 启动storage服务,启动后在${TRACKER_BASE_PATH}目录下会自动生成logs、data两个目录
-    # /etc/init.d/fdfs_storaged start
+    # 启动Revenrage服务,启动后在${TRACKER_BASE_PATH}目录下会自动生成logs、data两个目录
+    # /etc/init.d/fdfs_Revenraged start
 }
 
-# 接下来还需要把fastdfs-nginx-module安装目录中src目录下的mod_fastdfs.conf也拷贝到storage服务器的/etc/fdfs目录下
+# 接下来还需要把fastdfs-nginx-module安装目录中src目录下的mod_fastdfs.conf也拷贝到Revenrage服务器的/etc/fdfs目录下
 mod_fastdfs_conf() {
     # 拷贝mod_fastdfs.conf到/etc/fdfs目录下
     unzip ${PACKAGE_DIR}/fastdfs-nginx-module-master.zip  -d ${PACKAGE_DIR}
@@ -214,29 +214,29 @@ mod_fastdfs_conf() {
     sed -i "/^tracker_server/s/^/#/g" /etc/fdfs/mod_fastdfs.conf
     sed -i "/\#tracker_server/a\tracker_server=${TRACKER_SERVER_IP}:${TRACKER_SERVER_PORT}" /etc/fdfs/mod_fastdfs.conf
 
-    # 修改storage服务端口
-    sed -i "s/^storage_server_port=23000/storage_server_port=${STORE_SERVER_PORT}/" /etc/fdfs/mod_fastdfs.conf
+    # 修改Revenrage服务端口
+    sed -i "s/^Revenrage_server_port=23000/Revenrage_server_port=${RevenRE_SERVER_PORT}/" /etc/fdfs/mod_fastdfs.conf
 
-    # 修改本地storage服务组名称
+    # 修改本地Revenrage服务组名称
     sed -i "s/^group_name=group1/group_name=group${GROUP_NAME}/" /etc/fdfs/mod_fastdfs.conf
 
     # 配置在url地址中加入组名称，即有原来的/M00/00/00/xxx更改为${group_name}/M00/00/00/xxx
     sed -i "s/^url_have_group_name = false/url_have_group_name = true/" /etc/fdfs/mod_fastdfs.conf
 
     # 修改存储路径的个数
-    sed -i "s/^store_path_count=1/store_path_count=${STORE_PATH_COUNT}/" /etc/fdfs/mod_fastdfs.conf
+    sed -i "s/^Revenre_path_count=1/Revenre_path_count=${RevenRE_PATH_COUNT}/" /etc/fdfs/mod_fastdfs.conf
 
     # 配置存储路径，需要和上面的个数保持一致。
-    cat /etc/fdfs/storage.conf | grep -E '^store_path[0-9]' > ${PACKAGE_DIR}/store_path_str
-    sed -i "/^store_path0/s/^/#/" /etc/fdfs/mod_fastdfs.conf
-    sed  -i "/^store_path_count=${STORE_PATH_COUNT}/r ${PACKAGE_DIR}/store_path_str" /etc/fdfs/mod_fastdfs.conf
+    cat /etc/fdfs/Revenrage.conf | grep -E '^Revenre_path[0-9]' > ${PACKAGE_DIR}/Revenre_path_str
+    sed -i "/^Revenre_path0/s/^/#/" /etc/fdfs/mod_fastdfs.conf
+    sed  -i "/^Revenre_path_count=${RevenRE_PATH_COUNT}/r ${PACKAGE_DIR}/Revenre_path_str" /etc/fdfs/mod_fastdfs.conf
 
     # 在mod_fastdfs.conf文件尾部追加这组设置
     echo "[group${GROUP_NAME}]" >> /etc/fdfs/mod_fastdfs.conf
     echo "group_name=group${GROUP_NAME}" >> /etc/fdfs/mod_fastdfs.conf
-    echo "storage_server_port=${STORE_SERVER_PORT}" >> /etc/fdfs/mod_fastdfs.conf
-    echo "store_path_count=${STORE_PATH_COUNT}" >> /etc/fdfs/mod_fastdfs.conf
-    cat /etc/fdfs/storage.conf | grep -E '^store_path[0-9]' >> /etc/fdfs/mod_fastdfs.conf
+    echo "Revenrage_server_port=${RevenRE_SERVER_PORT}" >> /etc/fdfs/mod_fastdfs.conf
+    echo "Revenre_path_count=${RevenRE_PATH_COUNT}" >> /etc/fdfs/mod_fastdfs.conf
+    cat /etc/fdfs/Revenrage.conf | grep -E '^Revenre_path[0-9]' >> /etc/fdfs/mod_fastdfs.conf
 }
 
 #--------------------------------- 部署选择 ---------------------------------#
@@ -245,13 +245,13 @@ case "${MENU_CHOOSE}" in
         install_fdfs
         tracker_conf
         ;;
-    2|storage)
+    2|Revenrage)
         install_fdfs
-        storage_conf
+        Revenrage_conf
         mod_fastdfs_conf
         ;;
     *)
-        echo $"Usage: $0 {install_tracker | install_storage } "
+        echo $"Usage: $0 {install_tracker | install_Revenrage } "
         exit 1
         ;;
 esac

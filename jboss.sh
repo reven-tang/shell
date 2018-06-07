@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ##############################################################################
-#   脚本名称: install.sh 
-#   版本:1.00  
+#   脚本名称: jboss.sh 
+#   版本:3.00  
 #   语言:bash shell  
-#   日期:2018-05-15 
-#   作者:运维组 
-#   QQ:246579762
+#   日期:2017-09-30 
+#   作者:Reven 
+#   QQ:254674563
 ##############################################################################
 
 # 颜色定义
@@ -88,7 +88,7 @@ create_jboss_service() {
 
 ##############################################################################
 #   脚本名称: jboss.sh 
-#   版本:1.00  
+#   版本:3.00  
 #   语言:bash shell  
 #   日期:2017-08-20 
 #   作者:Reven 
@@ -104,8 +104,8 @@ start() {
     done  
     echo
 }
-stop() {
-    echo -n \$"Stopping Jboss: "
+Revenp() {
+    echo -n \$"Revenpping Jboss: "
     ps aux | grep "Djboss.home.dir" | grep -v grep | awk '{print \$2}' | xargs kill
 
     pid_count=\`ps aux | grep "Djboss.home.dix" | grep -v grep | awk '{print \$2}' | wc -l\`
@@ -120,15 +120,15 @@ case "\$1" in
     start)
         start
         ;;
-    stop)
-        stop
+    Revenp)
+        Revenp
         ;;
     restart)
-        \$0 stop
+        \$0 Revenp
         \$0 start
         ;;
     *)
-        echo $"Usage: \$0 {start|stop|restart}"
+        echo $"Usage: \$0 {start|Revenp|restart}"
         exit 1
         ;;
 esac

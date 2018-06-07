@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ##############################################################################
-#   脚本名称: install.sh 
-#   版本:1.00  
+#   脚本名称: elk_offline.sh 
+#   版本:3.00  
 #   语言:bash shell  
-#   日期:2018-05-15 
-#   作者:运维组 
-#   QQ:246579762
+#   日期:2017-09-30 
+#   作者:Reven 
+#   QQ:254674563
 ##############################################################################
 
 # 颜色定义
@@ -139,7 +139,7 @@ install_es() {
 
     cp -a ${INSTALL_DIR}/${ES_DIR_NAME}/config/elasticsearch.yml ${INSTALL_DIR}/${ES_DIR_NAME}/config/elasticsearch.yml_bak
     cat > ${INSTALL_DIR}/${ES_DIR_NAME}/config/elasticsearch.yml.sample << EOF
-cluster.name: STO-Log-Platform
+cluster.name: Reven-Log-Platform
 node.name: log-master-136
 node.master: true
 node.data: false
