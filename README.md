@@ -1,4 +1,5 @@
-# 蓝鲸一键部署任务
+一键部署脚本使用说明
+=====================
 
 [TOC]
 
@@ -38,9 +39,9 @@ source /etc/profile
 
 | 变量名 | 变量默认值 | 变量描述 |
 |:------|:------:|:-----|
-|MODULE      	|   jboss      	|        模块名称
-|IS_DOWNLOAD 	|   Y          	|     是否需要下载软件包{Y/y/N/n}
-|INSTALL_DIR 	|   /app       	|     安装目录
+|MODULE      	|   jboss      	|   模块名称
+|IS_DOWNLOAD 	|   Y          	|   是否需要下载软件包{Y/y/N/n}
+|INSTALL_DIR 	|   /app       	|   安装目录
 |JBOSS_NUM		|	1			|	实例个数
 |HTTP_PORTS 	|	8080		|	定义HTTP起始端口(原端口为8080)
 |AJP_PORTS 		|	8009		|	定义AJP起始端口(原端口为8009)
@@ -55,6 +56,14 @@ curl -s http://192.168.124.169:86/software/jboss.sh | bash -s $1 $2 $3 $4 $5 $6 
 
 >示例  
 curl -s http://192.168.124.169:86/software/jboss.sh | bash -s jboss y /app 1 8080 8009 8443 8090
+
+### 附：后续操作
+
+启动Jboss服务
+
+```bash
+/etc/init.d/jboss start
+```
 
 ------
 
@@ -85,9 +94,9 @@ curl -s http://192.168.124.169:86/software/nginx.sh | bash -s nginx y n
 
 | 变量名 | 变量默认值 | 变量描述 |
 |:------|:------:|:-----|
-|MODULE          	|	tomcat  |      模块名称
-|IS_DOWNLOAD     	|	Y       |      是否需要下载软件包{Y/y/N/n}
-|INSTALL_DIR     	|	/app    |      安装目录
+|MODULE          	|	tomcat  |      	模块名称
+|IS_DOWNLOAD     	|	Y       |      	是否需要下载软件包{Y/y/N/n}
+|INSTALL_DIR     	|	/app    |      	安装目录
 |TOMCAT_NUM 		|	1		|		实例个数
 |HTTP_PORTS 		|	8080	|		定义HTTP起始端口(原端口为8080)
 |AJP_PORTS			|	8009	|		定义AJP起始端口(原端口为8009)
@@ -132,6 +141,10 @@ curl -s http://192.168.124.169:86/software/mysql.sh | bash -s mysql y /app 3306 
 source /etc/profile
 ```
 
+### 附：后续操作
+
+*部署完成后mysql服务已经启动，并且会删除数据库中所有密码为空的不安全用户*
+
 ------
 
 ## 6，部署MariaDB
@@ -161,6 +174,11 @@ curl -s http://192.168.124.169:86/software/mariadb.sh | bash -s mariadb y /app 3
 ```bash
 source /etc/profile
 ```
+
+### 附：后续操作
+
+*部署完成后mariadb服务已经启动，并且会删除数据库中所有密码为空的不安全用户*
+
 ------
 
 ## 7，部署Redis
@@ -201,9 +219,9 @@ curl -s http://192.168.124.169:86/software/redis.sh | bash -s redis 1 y /app 1 6
 
 | 变量名 | 变量默认值 | 变量描述 |
 |:------|:------:|:-----|
-|MODULE         |	cachecloud  |  模块名称
-|IS_DOWNLOAD    |	Y           |  是否需要下载软件包{Y/y/N/n}
-|INSTALL_DIR    |	/app        |  选择安装版本{7/8}
+|MODULE         |	cachecloud  |  	模块名称
+|IS_DOWNLOAD    |	Y           |  	是否需要下载软件包{Y/y/N/n}
+|INSTALL_DIR    |	/app        |  	选择安装版本{7/8}
 |MYSQL_IP		|	127.0.0.1	|	输入MySQL服务所在服务器IP地址	
 |MYSQL_PORT		|	3306		|	输入MySQL服务端口
 |CC_PWD			|	cachecloud 	|	输入MySQL数据库中cachecloud用户的密码
@@ -384,6 +402,45 @@ curl -s http://192.168.124.169:86/software/rabbitmq.sh | bash -s rabbitmq 1 y /a
 source /etc/profile
 ```
 
+### 附：后续操作
+
+*部署后MQ服务已经启动，并且用户已经创建*
+
+**集群配置参考如下**
+
+- 集群节点互配hosts
+```bash
+vi /etc/hosts
+172.16.16.201	node0
+172.16.16.202	node1
+```
+- 保持两个节点的.erlang.cookie(cookie在用户家目录下)一致，且权限为400
+> *注意：默认权限均为400，如果.erlang.cookie不一致，可以分别将.erlang.cookie权限设为777，然后将节点1上的scp到节点2上，再将权限置为400，如：  
+node0 # chmod 777 /root/.erlang.cookie  
+node0 # scp /root/.erlang.cookie 172.16.16.202:/root/   
+重启MQ  
+rabbitmqctl stop  
+rabbitmq-server -detached*
+
+- 将 node1 与 node0 组成集群
+```bash
+node1 # rabbitmqctl stop_app 
+node1 # rabbitmqctl join_cluster rabbit@node0
+node1 # rabbitmqctl start_app
+```
+
+- 此时 node1 与 node0 会自动建立连接；如果要使用内存节点，则可以使用
+```bash
+node1 # rabbitmqctl join_cluster --ram rabbit@node0
+```
+
+- 集群配置好后，可以在 RabbitMQ 任意节点上执行 `rabbitmqctl cluster_status` 来查看是否集群配置成功。
+
+- 设置镜像队列策略，在任意一个节点上执行如下命令，将所有队列设置为镜像队列，即队列会被复制到各个节点，各个节点状态保持一致。
+```bash
+rabbitmqctl set_policy ha-all "^" '{"ha-mode":"all"}'
+```
+
 ------
 
 ## 13，部署ZooKeeper
@@ -412,6 +469,35 @@ curl -s http://192.168.124.169:86/software/zookeeper.sh | bash -s zookeeper y /a
 source /etc/profile
 ```
 
+### 附：后续操作
+
+**启动ZK**
+
+```bash
+$zookeeper/bin/zkServer.sh start
+```
+
+**集群配置参考如下**
+
+- ZK服务器集群规模不小于3个节点，要求各服务器之间系统时间要保持一致
+- 编辑ZK的配置文件zoo.cfg, 在文件尾部追加
+
+```bash
+$ vi zoo.cfg
+	server.0=node0:2888:3888
+    server.1=node1:2888:3888
+    server.2=node2:2888:3888
+```
+
+- 在data目录下，创建文件myid，值为0，其他服务器为1、2依次增加
+
+```bash
+$ touch $zookeeper/data/myid
+$ echo "0" > $zookeeper/data/myid
+```
+- 启动，在三个节点上分别执行命令`zkServer.sh start`
+- 检验，在节点上执行命令`zkServer.sh status`
+
 ------
 
 ## 14，部署SMB
@@ -434,6 +520,28 @@ curl -s http://192.168.124.169:86/software/smb.sh | bash -s $1 $2 $3 $4
 >示例  
 curl -s http://192.168.124.169:86/software/smb.sh | bash -s smb y /app /app/samba/data
 
+### 附：后续操作
+
+创建smb用户, 根据提示输入密码
+```bash
+useradd samba
+
+/usr/local/samba/bin/pdbedit -a -u samba
+
+```
+
+查看用户是否创建成功
+
+```bash
+/usr/local/samba/bin/pdbedit -L
+```
+
+启动samba服务器
+
+```bash
+/usr/local/samba/sbin/smbd
+```
+
 ------
 
 ## 15，部署Vsftp
@@ -450,14 +558,14 @@ curl -s http://192.168.124.169:86/software/smb.sh | bash -s smb y /app /app/samb
 |FTP_OPER_USER		|	sto_dev			|	定义vsftp操作员用户名
 |FTP_OPER_PASS		|	1qaz2wsx		|	定义vsftp操作员密码
 
-### 步骤一：部署JDK
+### 步骤一：部署Vsftp
 
 ```bash
-curl -s http://192.168.124.169:86/software/jdk.sh | bash -s $1 $2 $3 $4 $5 $6 $7
+curl -s http://192.168.124.169:86/software/vsftpd.sh | bash -s $1 $2 $3 $4 $5 $6 $7
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/jdk.sh | bash -s vsftpd y /data sto_app 1qaz2wsx sto_dev 1qaz2wsx
+curl -s http://192.168.124.169:86/software/vsftpd.sh | bash -s vsftpd y /data sto_app 1qaz2wsx sto_dev 1qaz2wsx
 
 ------
 
@@ -467,10 +575,10 @@ curl -s http://192.168.124.169:86/software/jdk.sh | bash -s vsftpd y /data sto_a
 
 | 变量名 | 变量默认值 | 变量描述 |
 |:------|:------:|:-----|
-|MODULE          			| jdk             		| 模块名称
+|MODULE          			| fdfs             		| 模块名称
 |MENU_CHOOSE				| 1						| 选择部署{1/2}, 其中1代表install_tracker, 2代表install_storage
 |IS_DOWNLOAD				| Y 					| 是否需要下载软件包{Y/y/N/n}
-|TRACKER_SERVER_IP			| 172.16.16.101		    |	输入tracker所在服务器的IP地址，仅对安装storage生效
+|TRACKER_SERVER_IP			| 172.16.16.101		    | 输入tracker所在服务器的IP地址，仅对安装storage生效
 |TRACKER_SERVER_PORT		| 22122					| 定义tracker服务端口
 |TRACKER_BASE_PATH			| /app/fastdfs/tracker 	| 定义tracker的base_path目录
 |TRACKER_HTTP_PORT			| 8888					| 定义tracker的HTTP端口
@@ -481,8 +589,22 @@ curl -s http://192.168.124.169:86/software/jdk.sh | bash -s vsftpd y /data sto_a
 |STORE_HTTP_PORT			| 8888					| 定义storage的HTTP端口
 |MOD_BASE_PATH 				| /data/fastdfs/mod/ 	| 定义MOD_BASE_PATH目录
 
-### 步骤一：部署JDK
+### 步骤一：部署FDFS
 
 ```bash
-curl -s http://192.168.124.169:86/software/jdk.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s http://192.168.124.169:86/software/fdfs.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
+
+### 附：后续操作
+
+启动fdfs
+
+```bash
+/etc/init.d/fdfs_trackerd start
+/etc/init.d/fdfs_storaged start
+
+```
+
+在Storage上和入口处分别部署并配置Nginx，在此省略...
+
+[回到顶部](#蓝鲸一键部署任务)
