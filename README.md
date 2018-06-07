@@ -19,11 +19,11 @@ JDK_VERSION   |  7      |         选择安装版本{7/8}
 ### 步骤一：部署JDK
 
 ```bash
-curl -s http://192.168.124.169:86/software/jdk.sh | bash -s $1 $2 $3
+curl -s https://github.com/reven-tang/shell/blob/master/jdk.sh | bash -s $1 $2 $3
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/jdk.sh | bash -s jdk y 7
+curl -s https://github.com/reven-tang/shell/blob/master/jdk.sh | bash -s jdk y 7
 
 ### 步骤二：生效环境变量
 
@@ -51,11 +51,11 @@ source /etc/profile
 ### 步骤一：部署Jboss
 
 ```bash
-curl -s http://192.168.124.169:86/software/jboss.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8
+curl -s https://github.com/reven-tang/shell/blob/master/jboss.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/jboss.sh | bash -s jboss y /app 1 8080 8009 8443 8090
+curl -s https://github.com/reven-tang/shell/blob/master/jboss.sh | bash -s jboss y /app 1 8080 8009 8443 8090
 
 ### 附：后续操作
 
@@ -80,11 +80,11 @@ curl -s http://192.168.124.169:86/software/jboss.sh | bash -s jboss y /app 1 808
 ### 步骤一：部署Nginx
 
 ```bash
-curl -s http://192.168.124.169:86/software/nginx.sh | bash -s $1 $2 $3
+curl -s https://github.com/reven-tang/shell/blob/master/nginx.sh | bash -s $1 $2 $3
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/nginx.sh | bash -s nginx y n
+curl -s https://github.com/reven-tang/shell/blob/master/nginx.sh | bash -s nginx y n
 
 ------
 
@@ -105,11 +105,11 @@ curl -s http://192.168.124.169:86/software/nginx.sh | bash -s nginx y n
 ### 步骤一：部署Tomcat
 
 ```bash
-curl -s http://192.168.124.169:86/software/tomcat.sh | bash -s $1 $2 $3 $4 $5 $6 $7
+curl -s https://github.com/reven-tang/shell/blob/master/tomcat.sh | bash -s $1 $2 $3 $4 $5 $6 $7
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/tomcat.sh | bash -s tomcat y /app 1 8080 8009 8005
+curl -s https://github.com/reven-tang/shell/blob/master/tomcat.sh | bash -s tomcat y /app 1 8080 8009 8005
 
 ------
 
@@ -129,11 +129,11 @@ curl -s http://192.168.124.169:86/software/tomcat.sh | bash -s tomcat y /app 1 8
 ### 步骤一：部署MySQL
 
 ```bash
-curl -s http://192.168.124.169:86/software/mysql.sh | bash -s $1 $2 $3 $4 $5 $6
+curl -s https://github.com/reven-tang/shell/blob/master/mysql.sh | bash -s $1 $2 $3 $4 $5 $6
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/mysql.sh | bash -s mysql y /app 3306 1qaz2wsx 1
+curl -s https://github.com/reven-tang/shell/blob/master/mysql.sh | bash -s mysql y /app 3306 1qaz2wsx 1
 
 ### 步骤二：生效环境变量
 
@@ -163,11 +163,11 @@ source /etc/profile
 ### 步骤一：部署MariaDB
 
 ```bash
-curl -s http://192.168.124.169:86/software/mariadb.sh | bash -s $1 $2 $3 $4 $5 $6
+curl -s https://github.com/reven-tang/shell/blob/master/mariadb.sh | bash -s $1 $2 $3 $4 $5 $6
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/mariadb.sh | bash -s mariadb y /app 3306 1qaz2wsx 1
+curl -s https://github.com/reven-tang/shell/blob/master/mariadb.sh | bash -s mariadb y /app 3306 1qaz2wsx 1
 
 ### 步骤二：生效环境变量
 
@@ -205,11 +205,11 @@ source /etc/profile
 ### 步骤一：部署Redis
 
 ```bash
-curl -s http://192.168.124.169:86/software/redis.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14}
+curl -s https://github.com/reven-tang/shell/blob/master/redis.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14}
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/redis.sh | bash -s redis 1 y /app 1 6379 0.0.0.0 1qaz2wsx 1000 1 127.0.0.1 6379 1qaz2wsx 1qaz2wsx
+curl -s https://github.com/reven-tang/shell/blob/master/redis.sh | bash -s redis 1 y /app 1 6379 0.0.0.0 1qaz2wsx 1000 1 127.0.0.1 6379 1qaz2wsx 1qaz2wsx
 
 ------
 
@@ -236,11 +236,11 @@ grant all on cachecloud.* to cachecloud@"${CC_IP}" identified by "${CC_PWD}";
 ```
 
 ```bash
-curl -s http://192.168.124.169:86/software/cachecloud.sh | bash -s $1 $2 $3 $4 $5 $6 $7
+curl -s https://github.com/reven-tang/shell/blob/master/cachecloud.sh | bash -s $1 $2 $3 $4 $5 $6 $7
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/cachecloud.sh | bash -s cachecloud y /app 127.0.0.1 3306 cachecloud 8585
+curl -s https://github.com/reven-tang/shell/blob/master/cachecloud.sh | bash -s cachecloud y /app 127.0.0.1 3306 cachecloud 8585
 
 ### 步骤二：生效环境变量
 
@@ -267,11 +267,11 @@ source /etc/profile
 ### 步骤一：部署ES
 
 ```bash
-curl -s http://192.168.124.169:86/software/elk.sh | bash -s $1 $2 $3 $4 $5 $6 $7
+curl -s https://github.com/reven-tang/shell/blob/master/elk.sh | bash -s $1 $2 $3 $4 $5 $6 $7
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/elk.sh | bash -s elk y 1 /app es01 9100 http://172.16.16.101:9200
+curl -s https://github.com/reven-tang/shell/blob/master/elk.sh | bash -s elk y 1 /app es01 9100 http://172.16.16.101:9200
 
 ### 步骤二：生效环境变量
 
@@ -298,11 +298,11 @@ source /etc/profile
 ### 步骤一：离线部署ES
 
 ```bash
-curl -s http://192.168.124.169:86/software/es_offline.sh | bash -s $1 $2 $3 $4 $5 $6 $7
+curl -s https://github.com/reven-tang/shell/blob/master/es_offline.sh | bash -s $1 $2 $3 $4 $5 $6 $7
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/es_offline.sh | bash -s es_offline y 1 /app es01 9100 http://172.16.16.101:9200
+curl -s https://github.com/reven-tang/shell/blob/master/es_offline.sh | bash -s es_offline y 1 /app es01 9100 http://172.16.16.101:9200
 
 ### 步骤二：生效环境变量
 
@@ -335,7 +335,7 @@ source /etc/profile
 ### 步骤一：部署MongoDB
 
 ```bash
-curl -s http://192.168.124.169:86/software/mongodb.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 
 source /etc/profile
 ```
@@ -343,31 +343,31 @@ source /etc/profile
 ### 步骤二：创建shard1副本集
 
 ```bash
-curl -s http://192.168.124.169:86/software/mongodb.sh | bash -s $1 3 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 3 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
 
 ### 步骤三：创建shard2副本集
 
 ```bash
-curl -s http://192.168.124.169:86/software/mongodb.sh | bash -s $1 4 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 4 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
 
 ### 步骤四：创建shard3副本集
 
 ```bash
-curl -s http://192.168.124.169:86/software/mongodb.sh | bash -s $1 5 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 5 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
 
 ### 步骤五：创建config副本集
 
 ```bash
-curl -s http://192.168.124.169:86/software/mongodb.sh | bash -s $1 6 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 6 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
 
 ### 步骤五：创建集群
 
 ```bash
-curl -s http://192.168.124.169:86/software/mongodb.sh | bash -s $1 7 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 7 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
 
 ------
@@ -390,11 +390,11 @@ curl -s http://192.168.124.169:86/software/mongodb.sh | bash -s $1 7 $3 $4 $5 $6
 ### 步骤一：部署RabbitMQ
 
 ```bash
-curl -s http://192.168.124.169:86/software/rabbitmq.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8
+curl -s https://github.com/reven-tang/shell/blob/master/rabbitmq.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/rabbitmq.sh | bash -s rabbitmq 1 y /app root 1qaz2wsx sto_dev 1qaz2wsx
+curl -s https://github.com/reven-tang/shell/blob/master/rabbitmq.sh | bash -s rabbitmq 1 y /app root 1qaz2wsx sto_dev 1qaz2wsx
 
 ### 步骤二：生效环境变量
 
@@ -457,11 +457,11 @@ rabbitmqctl set_policy ha-all "^" '{"ha-mode":"all"}'
 ### 步骤一：部署ZooKeeper
 
 ```bash
-curl -s http://192.168.124.169:86/software/zookeeper.sh | bash -s $1 $2 $3 $4
+curl -s https://github.com/reven-tang/shell/blob/master/zookeeper.sh | bash -s $1 $2 $3 $4
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/zookeeper.sh | bash -s zookeeper y /app 2181
+curl -s https://github.com/reven-tang/shell/blob/master/zookeeper.sh | bash -s zookeeper y /app 2181
 
 ### 步骤二：生效环境变量
 
@@ -514,11 +514,11 @@ $ echo "0" > $zookeeper/data/myid
 ### 步骤一：部署SMB
 
 ```bash
-curl -s http://192.168.124.169:86/software/smb.sh | bash -s $1 $2 $3 $4
+curl -s https://github.com/reven-tang/shell/blob/master/smb.sh | bash -s $1 $2 $3 $4
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/smb.sh | bash -s smb y /app /app/samba/data
+curl -s https://github.com/reven-tang/shell/blob/master/smb.sh | bash -s smb y /app /app/samba/data
 
 ### 附：后续操作
 
@@ -561,11 +561,11 @@ useradd samba
 ### 步骤一：部署Vsftp
 
 ```bash
-curl -s http://192.168.124.169:86/software/vsftpd.sh | bash -s $1 $2 $3 $4 $5 $6 $7
+curl -s https://github.com/reven-tang/shell/blob/master/vsftpd.sh | bash -s $1 $2 $3 $4 $5 $6 $7
 ```
 
 >示例  
-curl -s http://192.168.124.169:86/software/vsftpd.sh | bash -s vsftpd y /data sto_app 1qaz2wsx sto_dev 1qaz2wsx
+curl -s https://github.com/reven-tang/shell/blob/master/vsftpd.sh | bash -s vsftpd y /data sto_app 1qaz2wsx sto_dev 1qaz2wsx
 
 ------
 
@@ -592,7 +592,7 @@ curl -s http://192.168.124.169:86/software/vsftpd.sh | bash -s vsftpd y /data st
 ### 步骤一：部署FDFS
 
 ```bash
-curl -s http://192.168.124.169:86/software/fdfs.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s https://github.com/reven-tang/shell/blob/master/fdfs.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
 
 ### 附：后续操作
