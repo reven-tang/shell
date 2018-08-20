@@ -1,9 +1,9 @@
-一键部署脚本使用说明
+# 一键部署脚本使用说明
 =====================
 
 [TOC]
 
-#
+***
 
 ## 1，部署JDK
 
@@ -16,14 +16,17 @@ MODULE        |  jdk    |         模块名称
 IS_DOWNLOAD   |  Y      |         是否需要下载软件包{Y/y/N/n}
 JDK_VERSION   |  7      |         选择安装版本{7/8}
 
+脚本参数：
+${MODULE} ${IS_DOWNLOAD} ${JDK_VERSION}
+
 ### 步骤一：部署JDK
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/jdk.sh | bash -s $1 $2 $3
+curl -s http://172.24.201.68:8086/software/jdk.sh | bash -s $1 $2 $3
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/jdk.sh | bash -s jdk y 7
+curl -s http://172.24.201.68:8086/software/jdk.sh | bash -s jdk y 7
 
 ### 步骤二：生效环境变量
 
@@ -48,14 +51,17 @@ source /etc/profile
 |HTTPS_PORTS 	|	8443		|	定义HTTPS起始端口(原端口为8443)
 |OSGI_PORTS 	|	8090		|	定义OSGI-HTTP起始端口(原端口为8090)
 
+脚本参数：
+${MODULE} ${IS_DOWNLOAD} ${INSTALL_DIR} ${JBOSS_NUM} ${HTTP_PORTS} ${AJP_PORTS} ${HTTPS_PORTS} ${OSGI_PORTS}
+
 ### 步骤一：部署Jboss
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/jboss.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8
+curl -s http://172.24.201.68:8086/software/jboss.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/jboss.sh | bash -s jboss y /app 1 8080 8009 8443 8090
+curl -s http://172.24.201.68:8086/software/jboss.sh | bash -s jboss y /app 1 8080 8009 8443 8090
 
 ### 附：后续操作
 
@@ -77,14 +83,17 @@ curl -s https://github.com/reven-tang/shell/blob/master/jboss.sh | bash -s jboss
 |IS_DOWNLOAD   |  Y         |    是否需要下载软件包{Y/y/N/n}
 |IS_FDFS       |  N         |    是否支持FDFS、缓存模块{Y/y/N/n}
 
+脚本参数：
+${MODULE} ${IS_DOWNLOAD} ${IS_FDFS}
+
 ### 步骤一：部署Nginx
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/nginx.sh | bash -s $1 $2 $3
+curl -s http://172.24.201.68:8086/software/nginx.sh | bash -s $1 $2 $3
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/nginx.sh | bash -s nginx y n
+curl -s http://172.24.201.68:8086/software/nginx.sh | bash -s nginx y n
 
 ------
 
@@ -102,14 +111,17 @@ curl -s https://github.com/reven-tang/shell/blob/master/nginx.sh | bash -s nginx
 |AJP_PORTS			|	8009	|		定义AJP起始端口(原端口为8009)
 |SHUTDOWN_PORTS		|	8005	|		定义SHUTDOWN起始端口(原端口为8005)
 
+脚本参数：
+${MODULE} ${IS_DOWNLOAD} ${INSTALL_DIR} ${TOMCAT_NUM} ${HTTP_PORTS} ${AJP_PORTS} ${SHUTDOWN_PORTS}
+
 ### 步骤一：部署Tomcat
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/tomcat.sh | bash -s $1 $2 $3 $4 $5 $6 $7
+curl -s http://172.24.201.68:8086/software/tomcat.sh | bash -s $1 $2 $3 $4 $5 $6 $7
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/tomcat.sh | bash -s tomcat y /app 1 8080 8009 8005
+curl -s http://172.24.201.68:8086/software/tomcat.sh | bash -s tomcat y /app 1 8080 8009 8005
 
 ------
 
@@ -126,14 +138,17 @@ curl -s https://github.com/reven-tang/shell/blob/master/tomcat.sh | bash -s tomc
 |ROOT_PWD			|	1qaz2wsx	|	设置数据库用户root密码
 |BUFFER_POOL_SIZE 	|	1			|	设置innodb_buffer_pool_size大小,单位为G
 
+脚本参数：
+${MODULE} ${IS_DOWNLOAD} ${INSTALL_DIR} ${MYSQL_PORT} ${ROOT_PWD} ${BUFFER_POOL_SIZE}
+
 ### 步骤一：部署MySQL
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/mysql.sh | bash -s $1 $2 $3 $4 $5 $6
+curl -s http://172.24.201.68:8086/software/mysql.sh | bash -s $1 $2 $3 $4 $5 $6
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/mysql.sh | bash -s mysql y /app 3306 1qaz2wsx 1
+curl -s http://172.24.201.68:8086/software/mysql.sh | bash -s mysql y /app 3306 1qaz2wsx 1
 
 ### 步骤二：生效环境变量
 
@@ -160,14 +175,17 @@ source /etc/profile
 |ROOT_PWD			|	1qaz2wsx	|	设置数据库用户root密码
 |BUFFER_POOL_SIZE 	|	1			|	设置innodb_buffer_pool_size大小,单位为G
 
+脚本参数：
+${MODULE} ${IS_DOWNLOAD} ${INSTALL_DIR} ${MARIADB_PORT} ${ROOT_PWD} ${BUFFER_POOL_SIZE}
+
 ### 步骤一：部署MariaDB
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/mariadb.sh | bash -s $1 $2 $3 $4 $5 $6
+curl -s http://172.24.201.68:8086/software/mariadb.sh | bash -s $1 $2 $3 $4 $5 $6
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/mariadb.sh | bash -s mariadb y /app 3306 1qaz2wsx 1
+curl -s http://172.24.201.68:8086/software/mariadb.sh | bash -s mariadb y /app 3306 1qaz2wsx 1
 
 ### 步骤二：生效环境变量
 
@@ -202,14 +220,17 @@ source /etc/profile
 |REDIS_MASTERAUTH	|	1qaz2wsx		|	主Redis服务登入密码,仅配置主从时生效
 |AUTHPASS			|	1qaz2wsx		| 	集群认证密码
 
+脚本参数：
+${MODULE} ${MENU_CHOOSE} ${IS_DOWNLOAD} ${INSTALL_DIR} ${REDIS_NUM} ${REDIS_PORTS} ${REDIS_BIND} ${REDIS_REQUIREPASS} ${REDIS_MAXCLIENTS} ${REDIS_MAXMEMORY} ${PRI_REDIS_IP} ${PRI_REDIS_PORT} ${REDIS_MASTERAUTH} ${AUTHPASS}
+
 ### 步骤一：部署Redis
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/redis.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14}
+curl -s http://172.24.201.68:8086/software/redis.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14}
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/redis.sh | bash -s redis 1 y /app 1 6379 0.0.0.0 1qaz2wsx 1000 1 127.0.0.1 6379 1qaz2wsx 1qaz2wsx
+curl -s http://172.24.201.68:8086/software/redis.sh | bash -s redis 1 y /app 1 6379 0.0.0.0 1qaz2wsx 1000 1 127.0.0.1 6379 1qaz2wsx 1qaz2wsx
 
 ------
 
@@ -221,11 +242,14 @@ curl -s https://github.com/reven-tang/shell/blob/master/redis.sh | bash -s redis
 |:------|:------:|:-----|
 |MODULE         |	cachecloud  |  	模块名称
 |IS_DOWNLOAD    |	Y           |  	是否需要下载软件包{Y/y/N/n}
-|INSTALL_DIR    |	/app        |  	选择安装版本{7/8}
+|INSTALL_DIR    |	/app        |  	安装目录
 |MYSQL_IP		|	127.0.0.1	|	输入MySQL服务所在服务器IP地址	
 |MYSQL_PORT		|	3306		|	输入MySQL服务端口
 |CC_PWD			|	cachecloud 	|	输入MySQL数据库中cachecloud用户的密码
 |CC_WEB_PORT	|	8585		|	定义Cachecloud的WEB访问端口(原端口为8585)
+
+脚本参数：
+${MODULE} ${IS_DOWNLOAD} ${INSTALL_DIR} ${MYSQL_IP} ${MYSQL_PORT} ${CC_PWD} ${CC_WEB_PORT}
 
 ### 步骤一：部署CacheCloud
 
@@ -236,11 +260,11 @@ grant all on cachecloud.* to cachecloud@"${CC_IP}" identified by "${CC_PWD}";
 ```
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/cachecloud.sh | bash -s $1 $2 $3 $4 $5 $6 $7
+curl -s http://172.24.201.68:8086/software/cachecloud.sh | bash -s $1 $2 $3 $4 $5 $6 $7
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/cachecloud.sh | bash -s cachecloud y /app 127.0.0.1 3306 cachecloud 8585
+curl -s http://172.24.201.68:8086/software/cachecloud.sh | bash -s cachecloud y /app 127.0.0.1 3306 cachecloud 8585
 
 ### 步骤二：生效环境变量
 
@@ -264,14 +288,17 @@ source /etc/profile
 |HEAD_PORT		| 9100						|	定义HEAD插件WEB端口号(原端口9100)
 |ES_URL			| http://172.16.16.101:9200	|	定义HEAD插件默认连接的ES地址
 
+脚本参数：
+${MODULE} ${IS_DOWNLOAD} ${MENU_CHOOSE} ${INSTALL_DIR} ${ES_DIR_NAME} ${HEAD_PORT} ${ES_URL}
+
 ### 步骤一：部署ES
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/elk.sh | bash -s $1 $2 $3 $4 $5 $6 $7
+curl -s http://172.24.201.68:8086/software/elk.sh | bash -s $1 $2 $3 $4 $5 $6 $7
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/elk.sh | bash -s elk y 1 /app es01 9100 http://172.16.16.101:9200
+curl -s http://172.24.201.68:8086/software/elk.sh | bash -s elk y 1 /app es01 9100 http://172.16.16.101:9200
 
 ### 步骤二：生效环境变量
 
@@ -295,14 +322,17 @@ source /etc/profile
 |HEAD_PORT		| 9100						|	定义HEAD插件WEB端口号(原端口9100)
 |ES_URL			| http://172.16.16.101:9200	|	定义HEAD插件默认连接的ES地址
 
+脚本参数：
+${MODULE} ${IS_DOWNLOAD} ${MENU_CHOOSE} ${INSTALL_DIR} ${ES_DIR_NAME} ${HEAD_PORT} ${ES_URL}
+
 ### 步骤一：离线部署ES
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/es_offline.sh | bash -s $1 $2 $3 $4 $5 $6 $7
+curl -s http://172.24.201.68:8086/software/es_offline.sh | bash -s $1 $2 $3 $4 $5 $6 $7
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/es_offline.sh | bash -s es_offline y 1 /app es01 9100 http://172.16.16.101:9200
+curl -s http://172.24.201.68:8086/software/es_offline.sh | bash -s es_offline y 1 /app es01 9100 http://172.16.16.101:9200
 
 ### 步骤二：生效环境变量
 
@@ -332,10 +362,13 @@ source /etc/profile
 |MONGODB2_IP		|	172.16.16.102			|	MongoDB服务器2的IP地址
 |MONGODB3_IP		|	172.16.16.103			|	MongoDB服务器3的IP地址
 
+脚本参数：
+${MODULE} ${MENU_CHOOSE} ${IS_DOWNLOAD} ${INSTALL_DIR} ${MONGODB_DATA} ${SHARD_PORTS} ${CONFIG_PORT} ${MONGOS_PORT} ${OPLOGSIZE} ${SHARDS_NUM} ${MONGODB1_IP} ${MONGODB2_IP} ${MONGODB3_IP}
+
 ### 步骤一：部署MongoDB
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s http://172.24.201.68:8086/software/mongodb.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 
 source /etc/profile
 ```
@@ -343,31 +376,31 @@ source /etc/profile
 ### 步骤二：创建shard1副本集
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 3 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s http://172.24.201.68:8086/software/mongodb.sh | bash -s $1 3 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
 
 ### 步骤三：创建shard2副本集
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 4 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s http://172.24.201.68:8086/software/mongodb.sh | bash -s $1 4 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
 
 ### 步骤四：创建shard3副本集
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 5 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s http://172.24.201.68:8086/software/mongodb.sh | bash -s $1 5 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
 
 ### 步骤五：创建config副本集
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 6 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s http://172.24.201.68:8086/software/mongodb.sh | bash -s $1 6 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
 
 ### 步骤五：创建集群
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 7 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s http://172.24.201.68:8086/software/mongodb.sh | bash -s $1 7 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
 
 ------
@@ -387,14 +420,17 @@ curl -s https://github.com/reven-tang/shell/blob/master/mongodb.sh | bash -s $1 
 |MQ_OPER_USER	|	sto_dev				|	定义MQ操作员用户名
 |MQ_OPER_PASS	|	1qaz2wsx			|	定义MQ操作员密码
 
+脚本参数：
+${MODULE} ${MENU_CHOOSE} ${IS_DOWNLOAD} ${INSTALL_DIR} ${MQ_ADMIN_USER} ${MQ_ADMIN_PASS} ${MQ_OPER_USER} ${MQ_OPER_PASS}
+
 ### 步骤一：部署RabbitMQ
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/rabbitmq.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8
+curl -s http://172.24.201.68:8086/software/rabbitmq.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/rabbitmq.sh | bash -s rabbitmq 1 y /app root 1qaz2wsx sto_dev 1qaz2wsx
+curl -s http://172.24.201.68:8086/software/rabbitmq.sh | bash -s rabbitmq 1 y /app root 1qaz2wsx sto_dev 1qaz2wsx
 
 ### 步骤二：生效环境变量
 
@@ -454,14 +490,17 @@ rabbitmqctl set_policy ha-all "^" '{"ha-mode":"all"}'
 |INSTALL_DIR		|	/app 				|	安装目录
 |ZK_PORT			|	2181				|	定义ZK服务端口号(原端口为2181)
 
+脚本参数:
+${MODULE} ${IS_DOWNLOAD} ${INSTALL_DIR} ${ZK_PORT}
+
 ### 步骤一：部署ZooKeeper
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/zookeeper.sh | bash -s $1 $2 $3 $4
+curl -s http://172.24.201.68:8086/software/zookeeper.sh | bash -s $1 $2 $3 $4
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/zookeeper.sh | bash -s zookeeper y /app 2181
+curl -s http://172.24.201.68:8086/software/zookeeper.sh | bash -s zookeeper y /app 2181
 
 ### 步骤二：生效环境变量
 
@@ -511,14 +550,17 @@ $ echo "0" > $zookeeper/data/myid
 |INSTALL_DIR	|	/app 			|	安装目录
 |DATA_PATH		|	/app/samba/data	|	定义SMB数据存放目录
 
+脚本参数：
+${MODULE} ${IS_DOWNLOAD} ${INSTALL_DIR} ${DATA_PATH}
+
 ### 步骤一：部署SMB
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/smb.sh | bash -s $1 $2 $3 $4
+curl -s http://172.24.201.68:8086/software/smb.sh | bash -s $1 $2 $3 $4
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/smb.sh | bash -s smb y /app /app/samba/data
+curl -s http://172.24.201.68:8086/software/smb.sh | bash -s smb y /app /app/samba/data
 
 ### 附：后续操作
 
@@ -558,14 +600,17 @@ useradd samba
 |FTP_OPER_USER		|	sto_dev			|	定义vsftp操作员用户名
 |FTP_OPER_PASS		|	1qaz2wsx		|	定义vsftp操作员密码
 
+脚本参数：
+${MODULE} ${IS_DOWNLOAD} ${VSFTPD_DATA_PATH} ${FTP_ADMIN_USER} ${FTP_ADMIN_PASS} ${FTP_OPER_USER} ${FTP_OPER_PASS}
+
 ### 步骤一：部署Vsftp
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/vsftpd.sh | bash -s $1 $2 $3 $4 $5 $6 $7
+curl -s http://172.24.201.68:8086/software/vsftpd.sh | bash -s $1 $2 $3 $4 $5 $6 $7
 ```
 
 >示例  
-curl -s https://github.com/reven-tang/shell/blob/master/vsftpd.sh | bash -s vsftpd y /data sto_app 1qaz2wsx sto_dev 1qaz2wsx
+curl -s http://172.24.201.68:8086/software/vsftpd.sh | bash -s vsftpd y /data sto_app 1qaz2wsx sto_dev 1qaz2wsx
 
 ------
 
@@ -589,10 +634,13 @@ curl -s https://github.com/reven-tang/shell/blob/master/vsftpd.sh | bash -s vsft
 |STORE_HTTP_PORT			| 8888					| 定义storage的HTTP端口
 |MOD_BASE_PATH 				| /data/fastdfs/mod/ 	| 定义MOD_BASE_PATH目录
 
+脚本参数：
+${MODULE} ${MENU_CHOOSE} ${IS_DOWNLOAD} ${TRACKER_SERVER_IP} ${TRACKER_SERVER_PORT} ${TRACKER_BASE_PATH} ${TRACKER_HTTP_PORT} ${STORE_SERVER_PORT} ${STORE_BASE_PATH} ${STORE_PATH_COUNT} ${STORE_BASE} ${STORE_HTTP_PORT} ${MOD_BASE_PATH}
+
 ### 步骤一：部署FDFS
 
 ```bash
-curl -s https://github.com/reven-tang/shell/blob/master/fdfs.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
+curl -s http://172.24.201.68:8086/software/fdfs.sh | bash -s $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13}
 ```
 
 ### 附：后续操作
