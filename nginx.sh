@@ -25,8 +25,8 @@ ENV_DIR="/etc/profile"
 ACTIVE=1    # 1：部署  2：卸载  3：回滚 
 ACTIVE_TIME=`date '+%Y-%m-%d'`
 
-IS_DOWNLOAD=$2
-IS_FDFS=$3
+IS_DOWNLOAD=${2}
+IS_FDFS=${3}
 
 #--------------------------------- 基础模块 ---------------------------------#
 # 检查命令是否正确运行
@@ -105,7 +105,7 @@ install_nginx() {
 
     echo "开始打补丁"
     cd ${PACKAGE_DIR}/nginx-[0-9]*[0-9]
-    patch -p0 < ${PACKAGE_DIR}/nginx_upstream_check_module-master/check_1.11.1+.patch
+    patch -p1 < ${PACKAGE_DIR}/nginx_upstream_check_module-master/check_1.12.1+.patch
     check_ok
 
     echo "开始执行编译安装"

@@ -311,5 +311,5 @@ esac
 # source ${ENV_DIR}
 # cd ${INSTALL_DIR}/elasticsearch-head/ && grunt server &
 # 启动sql插件
-# su - elastic -c "cd ${INSTALL_DIR}/${ES_DIR_NAME}/plugins/sql/site-server && node node-server.js &"
+# su - elastic -c "cd ${INSTALL_DIR}/${ES_DIR_NAME}/plugins/sql/site-server/ && node node-server.js &"
 # ##################################################################################################
